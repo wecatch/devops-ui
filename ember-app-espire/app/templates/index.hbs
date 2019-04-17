@@ -1,0 +1,14 @@
+<div class="ui raised segments">
+{{#each-in model as |name value|}}
+  <div class="ui segment" >
+        <h3 class="ui orange header">
+            {{#link-to "app.detail" value.app.app_id class="item"  }}
+                {{name}}
+            {{/link-to}}
+        </h3>
+        <div class="extra content">
+          {{choose-host hostOptions=value.host app=value.app}}
+        </div>
+  </div>
+{{/each-in}}
+</div>

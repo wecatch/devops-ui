@@ -1,0 +1,93 @@
+{{#each flashMessages.queue as |flash|}}
+    {{component 'fly-message' flash=flash}}
+{{/each}}
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a href="/" class="item">
+      <i class="home icon"></i> Home
+    </a>
+    {{!-- <a class="item">
+      <i class="grid layout icon"></i> Browse
+    </a>
+    <a class="item">
+      <i class="mail icon"></i> Messages
+    </a>
+    <div class="ui simple dropdown item">
+      More
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item"><i class="edit icon"></i> Edit Profile</a>
+        <a class="item"><i class="globe icon"></i> Choose Language</a>
+        <a class="item"><i class="settings icon"></i> Account Settings</a>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui input"><input type="text" placeholder="Search..."></div>
+    </div> --}}
+  </div>
+</div>
+<div class="ui grid" style="margin-top:0" >
+    <div class="three wide column" style="width:240px !important" >
+        <div class="ui vertical red menu" >
+            <a href="" class="item">
+                <h2 class="ui green header">
+                    <i class="cube icon"></i>
+                    Devops
+                </h2>
+            </a>
+            {{!-- {{#link-to "index" class="item" }}
+                <i class="home icon"></i>
+                Dashboard
+            {{/link-to}} --}}
+            {{#link-to "domain" class="item" }}
+                <i class="cube icon"></i>
+                域名
+            {{/link-to}}
+            {{#link-to "tag" class="item" }}
+                <i class="cubes icon"></i>
+                分组
+            {{/link-to}}
+            {{#link-to "app" (query-params page=1) class="item"  }}
+                <i class="cubes icon"></i>
+                应用
+            {{/link-to}}
+            {{#link-to "computer" (query-params page=1 app_name=null) class="item" }}
+                <i class="server icon"></i>
+                主机
+            {{/link-to}}
+            {{#link-to "cloud" class="item" }}
+                <i class="server icon"></i>
+                云管理
+            {{/link-to}}
+            {{#link-to "consul" class="item" }}
+                <i class="cube icon"></i>
+                Consul
+            {{/link-to}}
+            {{!-- {{#link-to "gitlab" class="item" }}
+                <i class="gitlab icon"></i>
+                Gitlab
+            {{/link-to}} --}}
+        </div>              
+    </div>
+    <div class="thirteen wide column">
+        <div class="ui grid">
+            {{!-- <div class="row" >
+                <div class="ui large menu">
+                    <a class="item js-item-siderbar" >
+                        <i class="icon th"></i>
+                    </a>
+                    <div class="ui category search item">
+                        <div class="ui transparent icon input">
+                        <input class="prompt" type="text" placeholder="Search animals...">
+                        <i class="search link icon"></i>
+                        </div>
+                        <div class="results"></div>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="row">
+                {{outlet}}
+            </div>
+        </div>
+    </div>
+</div>

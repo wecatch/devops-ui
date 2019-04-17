@@ -1,0 +1,6 @@
+{
+  "name": "ember-app-espire",
+  "dependencies": {
+    "semantic": "^2.3.2"
+  }
+}

@@ -1,0 +1,18 @@
+<div class="sixteen wide column" style="padding-left:0px" >
+<div class="ui items" >
+    {{#each model as |rd|}}
+    <div class="item" style="border:1px solid #eaeaea;padding:10px;border-left:2px solid #39aa56;" >
+        <div class="content">
+            <a class="green small header">
+                <i class="tag icon"></i>
+                {{rd}}
+            </a>
+        </div>
+    </div>
+    {{else}}
+    <div class="ui text center aligned container">
+        没有更多数据了
+    </div>
+    {{/each}}
+</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="job-body">
+    <h3>任务进度</h3>
+    {{ui-progress percent=deployPercent class="indicating" }}
+    <div class="body">
+        {{#each deployContent as |log|}}
+            <p>{{log.deploy_message}}</p>
+        {{/each}}
+    </div>
+</div>
+<div class="log-body">
+    <h3>任务日志</h3>
+    <div class="body">
+        {{#each logContent as |log|}}
+            <p>{{format-log-message log.message}}</p>
+        {{/each}}
+    </div>
+</div>  

@@ -1,0 +1,9 @@
+<div class="ui form">
+    {{#ui-checkbox-group theme="grouped fields" value=choosedApp as |valueChange| }}
+        {{#each appOptions as |rd|}}
+        <div class="field" >
+            {{#ui-checkbox  value=rd.id action=(action valueChange) checked=rd.checked }}{{rd.name}}{{/ui-checkbox}}
+        </div>
+        {{/each}}
+    {{/ui-checkbox-group}}
+</div>

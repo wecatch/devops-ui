@@ -1,0 +1,24 @@
+<div class="ui form">
+    {{#if newDeployJob}}
+        {{#link-to "app.detail.deploy-detail" deployModel.app_id deployModel.id class="item" }}点击查看任务进度{{/link-to}}
+    {{/if}}
+    {{#if render}}
+    {{#ui-checkbox-group theme="inline fields" value=choosedHosts as |valueChange| }}
+        {{#each hostOptions as |rd|}}
+        <div class="field" >
+            {{#ui-checkbox  value=rd.private_ip action=(action valueChange) checked=rd.checked }}{{rd.private_ip}}{{/ui-checkbox}}
+        </div>
+        {{/each}}
+    {{/ui-checkbox-group}}
+    {{/if}}
+    
+    {{#if isChooseAll }}
+        <div class="ui small red button" {{action "cancelChooseAll"}} >取消</div>
+    {{else}}
+        <div class="ui small button" {{action "chooseAllHost"}} >全选</div>
+    {{/if}}
+    <div class="ui small button" {{action "createDeployJob"}} >部署</div>
+</div>
+
+
+{{deploy-form model=selectedItem modalShow=modalShow cancel=(action "cancelChooseAll") success=(action "cancelChooseAll") modelName=modelName choosedHosts=choosedHosts }}

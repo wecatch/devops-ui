@@ -1,0 +1,39 @@
+<div class="ui items deploy-list" >
+    {{#each model as |rd|}}
+    {{#link-to "app.detail.deploy-detail" rd.id class="item" }}
+        <div class="content" style="width:33.3%" >
+            <div class="header">
+                <div style="color:#39aa56" >
+                    <i class="battery full icon"></i>
+                    # {{format-commit-id rd.commit_id}}
+                </div>
+            </div>
+            <div class="description">
+                {{format-time rd.created_at}}
+            </div>
+        </div>
+        <div class="content" style="width:33.3%" >
+            <div class="green small header">
+                {{format-time rd.created_at}}
+            </div>
+            <div class="meta">
+                <span class="author"></span>
+                {{!-- <span class="stay">{{rd.commit.authored_date}}</span> --}}
+            </div>
+            <div class="description">
+                <p>{{rd.desc}}</p>
+            </div>
+        </div>
+        
+        {{!-- <div class="content" style="width:33.3%" >
+            <div class="extra">
+                <button class="ui small button">展开</button>
+            </div>
+        </div> --}}
+    {{/link-to}}
+    {{else}}
+    <div class="ui text center aligned container">
+        没有更多数据了
+    </div>
+    {{/each}}
+</div>

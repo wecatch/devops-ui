@@ -1,0 +1,5 @@
+<div class="ui secondary orange menu">
+    {{#link-to "gitlab.project" (query-params gid=null limit=null page=null)  class="item" }}Projects{{/link-to}}
+    {{#link-to "gitlab.group" class="item" }}Group{{/link-to}}
+</div>
+{{outlet}}

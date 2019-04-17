@@ -1,0 +1,26 @@
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>域名</th>
+          <th>名称</th>
+          <th>绑定的 ip</th>
+          <th>状态</th>
+          <th>创建时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model  as |record|}}
+        <tr>
+          <td>{{record.host}}</td>
+          <td>{{record.name}}</td>
+          <td>{{record.ip}}</td>
+          {{!-- 结合 consul --}}
+          <td class="positive" >可用</td>
+          <td>{{record.created_at}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+</table>
+
+
+{{partial "page"}}

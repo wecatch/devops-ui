@@ -1,0 +1,40 @@
+<div class="ui form" style="width:100%" >
+    {{#ui-input placeholder="App 名称" theme="mini action" value=app_name }}
+      {{#ui-button action=(action "searchApp") }}search{{/ui-button}}
+    {{/ui-input}}
+</div>
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>应用分组</th>
+          <th class="sorted ascending"  >应用名称</th>
+          <th>云主机id</th>
+          <th>CPU</th>
+          <th>RAM</th>
+          <th>public ip</th>
+          <th>private ip</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+          <td>{{rd.tag}}</td>
+          <td>{{rd.name}}</td>
+          <td>{{rd.host_id}}</td>
+          <td>{{rd.cpu}}</td>
+          <td>{{rd.ram}}</td>
+          <td>{{rd.public_ip}}</td>
+          <td>{{rd.private_ip}}</td>
+          <td>
+              {{consul-register-service app_id=rd.app_id host_id=rd.host_id app_name=rd.name port=rd.port private_ip=rd.private_ip tag=rd.tag register_status=rd.register_status}}
+              {{#unless rd.register_status}}
+                  {{app-computer-offline app_id=rd.app_id host_id=rd.host_id model=model rd=rd }}
+              {{/unless}}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+</table>
+
+{{partial "page"}}

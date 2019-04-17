@@ -1,0 +1,26 @@
+<table class="ui table">
+     <thead>
+        <tr>
+          <th>服务id</th>
+          <th>服务名称</th>
+          <th>服务标签</th>
+          <th>服务地址</th>
+          <th>服务端口</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+            <td>{{rd.service_id}}</td>
+            <td>{{rd.service_name}}</td>
+            <td>{{rd.service_tags}}</td>
+            <td>{{rd.service_address}}</td>
+            <td>{{rd.service_port}}</td>
+            <td>
+              {{!-- {{consul-register-service service_id=rd.service_id register_status=1 app_name=rd.service_name}} --}}
+            </td>
+        </tr>
+        {{/each}}
+      </tbody>
+</table>

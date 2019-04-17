@@ -1,0 +1,14 @@
+{{#ui-form loading=loading }}
+    {{#each flashMessages.queue as |flash|}}
+        {{#ui-message type=(to-lower flash.type) theme="attached" header=flash.message}}
+        {{/ui-message}}
+    {{/each}}
+    {{#ui-form-input value=model.name label="名称" }}{{/ui-form-input}}
+    <div class="field" >
+        <label>描述</label>
+        {{#ui-select options=tagOptions value=model.kind namePath="name" valuePath="value" }}{{/ui-select}}
+    </div>
+    <button class="ui green button" {{action "save"}}  >保存</button>
+    <button class="ui  button" {{action "cancel"}}  >取消</button>
+{{/ui-form}}
+

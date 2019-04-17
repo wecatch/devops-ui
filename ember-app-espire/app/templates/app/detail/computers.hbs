@@ -1,0 +1,28 @@
+<div class="ui pink segment">
+    <h4 class="ui center aligned header">
+        主机信息
+    </h4>
+    <table class="ui table" style="border:0" >
+        <thead>
+            <tr>
+                <th >主机id</th>
+                <th >主机ip</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each model as |rd|}}
+            <tr>
+                <td>{{rd.host_id}}</td>
+                <td>{{rd.private_ip}}</td>
+                <td>
+                    {{consul-register-service app_id=rd.app_id host_id=rd.host_id app_name=rd.name port=rd.port private_ip=rd.private_ip tag=rd.tag register_status=rd.register_status}}
+                    {{#unless rd.register_status}}
+                        {{app-computer-offline app_id=rd.app_id host_id=rd.host_id model=model rd=rd }}
+                    {{/unless}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

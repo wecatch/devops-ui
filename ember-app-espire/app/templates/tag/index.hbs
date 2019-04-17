@@ -1,0 +1,19 @@
+<div class="ui secondary orange menu">
+    {{#link-to "tag.new"  class="item" }}新建分组{{/link-to}}
+</div>
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>分组名称</th>
+          <th>分组类型</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+          <td>{{rd.name}}</td>
+          <td>{{rd.kind}}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+</table>

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pbmessage ;
+
+message LogMessage {
+    int32 deploy_id = 1;
+    string message = 2;
+    int64 time = 3;
+    string cmd_status = 4;
+    string cmd_type = 5;
+    string deploy_status = 6;
+    string hosts = 7;
+}

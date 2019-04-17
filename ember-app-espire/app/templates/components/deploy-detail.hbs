@@ -1,0 +1,62 @@
+<h3>任务详情</h3>
+<div class="ui items deploy-list" >
+    <div class="item active">
+        <div class="content">
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#39aa56">
+                    {{model.desc}}
+                </div>
+            </div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#39aa56" >
+                    # {{format-commit-id model.commit_id}}
+                </div>
+            </div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#39aa56" >
+                    <i class="clock icon"></i>
+                    {{format-time model.created_at}}
+                </div>
+            </div>
+            <div style="height:20px" ></div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#2185d0">
+                    <i class="hourglass start icon"></i>
+                    {{format-time model.started_at}}
+                </div>
+            </div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#2185d0">
+                    <i class="hourglass end icon"></i>
+                    {{format-time model.finished_at}}
+                </div>
+            </div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#2185d0" >
+                    <i class="clock icon"></i>
+                    {{format-time model.started_at model.finished_at}}
+                </div>
+            </div>
+            <div style="height:20px" ></div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#f2711c">
+                    {{deploy-status model.status}}
+                </div>
+            </div>
+            <div class="header" style="width:33%;display;block" >
+                <div style="color:#f2711c">
+                    <a href="https://martin-upload.wcar.net.cn/devops/{{app.name}}_{{model.id}}" target="_blank" >部署日志</a>
+                </div>
+            </div>
+            <div style="height:20px" ></div>
+            <div class="header" style="width:100%;display;block" >
+                <div style="color:#2185d0">
+                    {{format-hosts model.hosts}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    {{deploy-log deploy=model}}
+</div>

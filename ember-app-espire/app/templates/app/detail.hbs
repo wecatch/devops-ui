@@ -1,0 +1,86 @@
+<div class="sixteen wide column" style="padding-left:0" >
+    <div class="ui big breadcrumb">
+        {{#link-to "app" }}APPS{{/link-to}}
+        <i class="right angle icon divider"></i>
+        <div class="active section">{{model.app.name}}</div>
+    </div>
+    <div class="ui blue segment">
+        <h4 class="ui center aligned header">
+            基本信息
+        </h4>  
+        <table class="ui single line table" style="border:0"  >
+            <tbody>
+                <tr>
+                    <td class="center aligned four wide" >应用名称</td>
+                    <td>{{model.app.name}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >功能描述</td>
+                    <td>{{model.app.desc}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >仓库地址</td>
+                    <td>
+                        <a href="{{model.app.repository_url}}" alt="{{model.app.repository_url}}" >repository</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >部署目录</td>
+                    <td>{{model.app.deploy_dir}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >监控地址</td>
+                    <td>{{model.app.monitor_url}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >外部调用地址</td>
+                    <td>{{model.app.url}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >内部调用地址</td>
+                    <td>{{model.app.internal_url}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >端口</td>
+                    <td>{{model.app.port}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >创建时间</td>
+                    <td>{{model.app.created_at}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >执行命令的目录</td>
+                    <td>{{model.app.cmd_dir}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >代码更新</td>
+                    <td>{{model.app.cmd_name}} {{model.app.update_code_cmd}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >服务重启</td>
+                    <td>{{model.app.cmd_name}} {{model.app.reload_service_cmd}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >服务检测</td>
+                    <td>{{model.app.cmd_name}} {{model.app.check_service_cmd}}</td>
+                </tr>
+                <tr>
+                    <td class="center aligned" >操作</td>
+                    <td>
+                        {{#link-to "app.edit" model.app.id class="ui tiny small basic green button" }}修改{{/link-to}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+</div>
+<div style="height:20px"></div>
+<div class="sixteen wide column" style="padding-left:0" >
+    <div class="ui secondary orange menu">
+        {{#link-to "app.detail.computers" class="item" }}Hosts{{/link-to}}
+        {{!-- {{#link-to "app.detail.tags" model.app.repository_id class="item" }}Tags{{/link-to}} --}}
+        {{#link-to "app.detail.commits" model.app.repository_id class="item" }}Commits{{/link-to}}
+        {{#link-to "app.detail.deploys" class="item" }}Deploy Histories{{/link-to}}
+    </div>
+    {{outlet}}
+</div>

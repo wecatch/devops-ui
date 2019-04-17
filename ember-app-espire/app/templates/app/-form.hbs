@@ -1,0 +1,32 @@
+{{#ui-form loading=loading }}
+    {{#each flashMessages.queue as |flash|}}
+        {{#ui-message type=(to-lower flash.type) theme="attached" header=flash.message}}
+        {{/ui-message}}
+    {{/each}}
+    {{#ui-form-input value=model.name label="应用名称" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.url label="外部调用地址" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.internal_url label="内部调用地址" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.port type="number" label="端口" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.desc label="功能描述" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.repository_url label="仓库地址" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.deploy_dir label="部署目录" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.monitor_url label="监控地址" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.repository_id label="仓库 id" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.cmd_name label="命令" }}{{/ui-form-input}}
+    {{#ui-form-input value=model.cmd_dir label="执行命令的目录" }}{{/ui-form-input}}
+    {{#ui-form-input 
+        value=model.update_code_cmd
+        label="代码更新(最多包含两个占位符，分别是应用名称和主机 ip: fab -f v12.py -n=%s -h=%s)"  }}{{/ui-form-input}}
+    {{#ui-form-input 
+        value=model.reload_service_cmd
+        label="服务重启"  }}{{/ui-form-input}}
+    {{#ui-form-input 
+        value=model.check_service_cmd
+        label="服务检查" }}{{/ui-form-input}}
+    <div class="field" >
+        <label>应用分组</label>
+        {{#ui-select options=tagOptions value=model.tag namePath="name" valuePath="name" }}{{/ui-select}}
+    </div>
+    <button class="ui green button" {{action "save"}}  >保存</button>
+    <button class="ui  button" {{action "cancel"}}  >取消</button>
+{{/ui-form}}

@@ -1,0 +1,62 @@
+<div class="" style="width:100%" >
+    {{#ui-button class="green" action=(action "sync") loading=syncLoading }}同步主机{{/ui-button}}
+    {{#ui-input placeholder="ip、标签、名称" theme="mini action" onChange=(action "searchApp")}}
+    {{/ui-input}}
+
+    {{partial "page"}}
+</div>
+    
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>主机id</th>
+          <th>主机分组</th>
+          <th>主机名称</th>
+          <th>CPU</th>
+          <th>RAM</th>
+          <th>public ip</th>
+          <th>private ip</th>
+          <th>
+            <div class="ui basic green button" {{action "displayModal" rd }} >添加到 APP</div>
+            {{#if chooseAll}}
+                <div class="ui button" {{action "cancelChooseAllHost" }} >取消全选</div>
+            {{else}}
+                <div class="ui button" {{action "chooseAllHost" }} >全选</div>
+            {{/if}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.computer as |rd|}}
+        <tr>
+          <td>{{rd.host_id}}</td>
+          <td>{{rd.host_tag}}</td>
+          <td>{{rd.host_name}}</td>
+          <td>{{rd.cpu}}</td>
+          <td>{{rd.ram}}</td>
+          <td>{{rd.public_ip}}</td>
+          <td>{{rd.private_ip}}</td>
+          <td colspan="2" >
+              {{ui-checkbox value=rd checked=rd.checked action=(action "chooseHost") }}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+</table>
+
+{{#ui-modal show=display }}
+    {{#ui-modal-title }}Choose App{{/ui-modal-title}}
+    {{#ui-modal-content theme="image"}}
+        {{add-host-to-app choosedApp=choosedApp appOptions=model.app }}
+    {{/ui-modal-content}}
+    {{#ui-modal-foot}}
+      <div class="ui grey basic button" {{action "cancelApp" }} >
+          Cancel
+      </div>
+      <div class="ui green button" {{action "saveApp"}} >
+          Confirm
+      </div>
+    {{/ui-modal-foot}}
+  {{/ui-modal}}
+
+{{partial "page"}}

@@ -1,0 +1,24 @@
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>id</th>
+          <th>名称</th>
+          <th>描述</th>
+          <th>地址</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+          <td>{{rd.id}}</td>
+          <td>{{rd.name}}</td>
+          <td>{{rd.description}}</td>
+          <td>
+            <a href="{{rd.web_url}}" alt="{{rd.web_url}}" >
+              {{rd.web_url}}
+            </a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+</table>

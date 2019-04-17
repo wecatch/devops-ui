@@ -1,0 +1,14 @@
+<div class="ui grid">
+    <div class="row">
+        <div class="ui big breadcrumb">
+            {{#link-to "app" }}APPS{{/link-to}}
+            <i class="right angle icon divider"></i>
+            <div class="active section">{{model.name}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ten column" style="padding-left:0" >
+            {{app-form model=model cancel=(action "cancel") success=(action "success") fail=(action "fail") modelName=modelName tagOptions=tagOptions }}
+        </div>
+    </div>
+</div>

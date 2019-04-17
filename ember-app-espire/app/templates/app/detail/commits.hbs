@@ -1,0 +1,37 @@
+<div class="ui items" >
+    {{#each model as |rd|}}
+    <div class="item" style="border:1px solid #eaeaea;padding:10px;border-left:5px solid #39aa56;" >
+        <div class="content" style="width:33.3%" >
+            <div class="header">
+                <a href="https://github.com/wecatch/ember-easy-orm/commit/{{rd.id}}" style="color:#39aa56" >
+                    <i class="battery full icon"></i>
+                    # {{rd.short_id}}
+                </a>
+            </div>
+            <div class="meta">
+                <span class="author">{{rd.committer_name}}</span>
+                {{!-- <span class="stay">{{rd.committed_date}}</span> --}}
+            </div>
+            <div class="description">
+                <p>{{rd.message}}</p>
+            </div>
+        </div>
+        <div class="content" style="width:33.3%" >
+            <div class="description">
+                {{rd.committed_date}}
+            </div>
+        </div>
+        <div class="content" style="width:33.3%" >
+            <div class="extra">
+                <button class="ui small button" {{action "add" rd }} >部署</button>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="ui text center aligned container">
+        没有更多数据了
+    </div>
+    {{/each}}
+</div>
+
+{{deploy-form model=selectedItem modalShow=modalShow cancel=(action "cancel") success=(action "success") modelName=modelName }}

@@ -1,0 +1,16 @@
+{{#ui-modal show=modalShow }}
+{{#ui-modal-title }}New Deploy Job{{/ui-modal-title}}
+{{#ui-modal-content theme="image"}}
+<div class="ui form" >
+    {{partial "app/deploy-form"}}
+</div>
+{{/ui-modal-content}}
+{{#ui-modal-foot}}
+    <div class="ui grey basic button" {{action "cancel" }} >
+        Cancel
+    </div>
+    <div class="ui green button" {{action "save"}} >
+        Confirm
+    </div>
+{{/ui-modal-foot}}
+{{/ui-modal}}

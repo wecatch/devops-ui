@@ -1,0 +1,18 @@
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>可用区</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+          <td>{{rd}}</td>
+          <td>
+            <div class="ui basic red button" {{action "deleteRecord" rd }} >删除</div>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+</table>

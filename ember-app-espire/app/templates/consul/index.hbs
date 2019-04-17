@@ -1,0 +1,44 @@
+<div class="" style="width:100%" >
+    {{#ui-input placeholder="服务名称" theme="mini action" value=name}}
+    {{/ui-input}}
+
+    {{partial "page"}}
+</div>
+<table class="ui table">
+     <thead>
+        <tr>
+          <th>服务名称</th>
+          <th>服务标签</th>
+          <th>调用地址</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each-in filterModel as |key value|}}
+                {{#if value.length}}
+                {{#each (slice 0 1 value) as |v|}}
+                <tr>
+                    <td rowspan="{{value.length}}" >{{key}}</td>
+                    <td>{{v}}</td>
+                    <td>{{v}}.{{ key }}.service.consul</td>
+                    <td>
+                        {{#link-to "consul.service" (query-params name=key tag=v) }}详情{{/link-to}}
+                    </td>
+                </tr>
+                {{/each}}
+                {{#each (slice 1 value.length value) as |v|}}
+                <tr>
+                    <td>{{v}}</td>
+                    <td>{{v}}.{{ key }}.service.consul</td>
+                    <td>
+                        {{#link-to "consul.service" (query-params name=key tag=v) }}详情{{/link-to}}
+                    </td>
+                </tr>
+                {{/each}}
+                {{/if}}
+        {{/each-in}}
+      </tbody>
+</table>
+
+
+{{partial "page"}}

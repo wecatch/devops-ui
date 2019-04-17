@@ -1,0 +1,41 @@
+
+<div class="ui secondary orange menu">
+    {{#link-to "app.new"  class="item" }}新建应用{{/link-to}}
+</div>
+<div class="ui form" style="width:100%" >
+    {{#ui-input placeholder="App 名称" theme="mini action" value=name }}
+      {{#ui-button action=(action "searchApp") }}search{{/ui-button}}
+    {{/ui-input}}
+</div>
+<table class="ui selectable striped table">
+     <thead>
+        <tr>
+          <th>应用名称</th>
+          <th>应用分组</th>
+          <th>外部调用地址</th>
+          <th>内部调用地址</th>
+          <th>功能描述</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |rd|}}
+        <tr>
+          <td>{{rd.name}}</td>
+          <td>{{rd.tag}}</td>
+          <td>{{rd.url}}</td>
+          <td>{{rd.internal_url}}</td>
+          <td>{{rd.desc}}</td>
+          <td>{{rd.created_at}}</td>
+          <td>
+              {{#link-to "app.detail" rd.id class="ui tiny small blue basic button" }}详情{{/link-to}}
+              {{#link-to "app.edit" rd.id class="ui tiny small basic green button" }}修改{{/link-to}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+</table>
+
+
+{{partial "page"}}

@@ -1,0 +1,154 @@
+/* http://tobiasahlin.com/spinkit/# */
+.ui-spinner {
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
+  }
+  
+  .ui-spinner > div {
+    width: 18px;
+    height: 18px;
+    /* background-color: #333; */
+    
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .ui-spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+    background-color: #db2828;
+
+  }
+  
+  .ui-spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+    background-color: #fbbd08;
+  }
+
+  .ui-spinner .bounce3 {
+    background-color: #21ba45;
+  }
+  
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% { 
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+
+  .m-message{
+    position: fixed;
+    background: #fff;
+    z-index: 999;
+    min-width: 250px;
+    right: 0;
+    margin-left: -100px;
+    z-index: 9999;
+}
+
+.m-message  .message {
+  height: 100%;
+}
+
+
+.ui.modal>.content{
+  width: auto;
+}
+
+.deploy-list .item {
+  border:1px solid #eaeaea !important;
+  padding:10px !important;
+  border-left-width:5px !important;
+}
+
+.deploy-list .active {
+  border-left-color: #39aa56 !important; 
+}
+
+.deploy-list .item:hover {
+  border-left-color: #39aa56 !important;
+  background-color: #deecdc !important;
+}
+
+.deploy-log-list>.item {
+  border:1px solid #eaeaea !important;
+  padding:10px !important;
+  border-left-width:5px !important;
+}
+
+
+.log-body div.body {
+    clear: left;
+    min-height: 42px;
+    padding: 15px 20px;
+    color: #f1f1f1;
+    font-family: Cousine,monospace;
+    font-size: 14px;
+    /*line-height: 19px;
+    white-space: pre-wrap;
+    word-wrap: break-word;*/
+    background-color: #222;
+    counter-reset: line-numbering;
+    margin-top: 0;
+    height: 550px;
+    /*overflow-y: scroll;*/
+    overflow-y: auto;
+}
+
+.log-body p {
+  margin: 8px 0 !important;
+  line-height: 1;
+}
+
+.job-body p {
+  margin: 8px 0 !important;
+  line-height: 1; 
+}
+
+.job-body div.body {
+    clear: left;
+    /*min-height: 600px;
+    max-height: 100px;*/
+    height: 200px;
+    overflow-y: scroll;
+    padding: 15px 20px;
+    color: #f2711c;
+    font-family: Cousine,monospace;
+    font-size: 14px;
+    /*line-height: 19px;
+    white-space: pre-wrap;
+    word-wrap: break-word;*/
+    background-color: #deecdc;
+    counter-reset: line-numbering;
+    margin-top: 0; 
+}
+
+
+.log-header {
+  height: 44px;
+  margin: 0;
+  padding: .7em .8em .6em;
+  text-align: right;
+  background-color: #444;
+}
+
+.log-line {
+  position: relative;
+  padding: 0 15px 0 62px;
+  margin: 0;
+  min-height: 19px;
+}
+
+   

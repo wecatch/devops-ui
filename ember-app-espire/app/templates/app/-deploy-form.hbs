@@ -1,0 +1,38 @@
+{{#ui-form loading=loading }}
+{{#each flashMessages.queue as |flash|}}
+    {{#ui-message type=(to-lower flash.type) theme="attached" header=flash.message}}
+    {{/ui-message}}
+{{/each}}
+{{#if choosedHosts}}
+<div class="field">
+    部署主机：
+    {{#each choosedHosts as |h|}}
+        <span>{{h}},</span>
+    {{/each}}
+</div>
+{{/if}}
+{{#ui-form-input 
+    value=model.max
+    label="每次更新几台主机" }}{{/ui-form-input}}
+{{#ui-form-input
+    value=model.desc
+    label="描述" }}{{/ui-form-input}}
+{{#ui-form-input
+    value=model.interval
+    label="每次更新间隔(秒)" }}{{/ui-form-input}}
+{{#ui-form-input 
+    value=model.commit_id
+    label="Commit" readonly=true }}{{/ui-form-input}}
+{{#ui-form-input 
+    value=model.binary_url
+    label="二进制包" }}{{/ui-form-input}}
+{{!-- {{#ui-form-input 
+    value=model.commit_tag
+    label="Tag" }}{{/ui-form-input}}
+{{#ui-form-input 
+    value=model.rollback_id
+    label="回滚 Commit" }}{{/ui-form-input}}
+{{#ui-form-input 
+    value=model.rollback_tag 
+    label="回滚 Tag" }}{{/ui-form-input}} --}}
+{{/ui-form}}
