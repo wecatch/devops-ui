@@ -16,13 +16,13 @@ func CreateRegion(form resources.CloudAvailableRegionForm) {
 	now := time.Now()
 	region.UpdatedAt = now
 	region.CreatedAt = now
-	db.DB.Create(&region)
+	db.Session().Create(&region)
 }
 
 //QueryRegion for region query
 func QueryRegion() []string {
 	var ret []model.CloudAvailableRegion
-	db.DB.Where(&model.CloudAvailableRegion{}).Find(&ret)
+	db.Session().Where(&model.CloudAvailableRegion{}).Find(&ret)
 	var result []string
 	for _, r := range ret {
 		result = append(result, r.Region)

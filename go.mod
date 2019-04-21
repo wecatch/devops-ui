@@ -1,4 +1,4 @@
-module shequan.com/background/devops-ui
+module github.com/wecatch/devops-ui
 
 require (
 	cloud.google.com/go v0.37.2 // indirect

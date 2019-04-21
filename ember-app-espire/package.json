@@ -41,7 +41,7 @@
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^5.0.1",
-    "ember-semantic-ui": "^0.2.0",
+    "ember-semantic-ui": "^0.2.3",
     "ember-source": "~3.4.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-websockets": "^7.2.0",

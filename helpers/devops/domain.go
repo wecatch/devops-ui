@@ -20,7 +20,7 @@ func CreateDomain(name, host string, private uint, ip string) {
 	domain.UpdatedAt = now
 	domain.CreatedAt = now
 	fmt.Println(domain)
-	db.DB.Create(&domain)
+	db.Session().Create(&domain)
 }
 
 // UpdateDomain update
@@ -30,7 +30,7 @@ func UpdateDomain(id int, name, host string, private uint) {
 			ID: id,
 		},
 	}
-	db.DB.Model(&domain).Updates(&model.Domain{Name: name, Host: host})
+	db.Session().Model(&domain).Updates(&model.Domain{Name: name, Host: host})
 }
 
 // QueryDomain domain list
@@ -49,11 +49,11 @@ func QueryDomain(page, limit int, name, host string) []model.Domain {
 		query += "and host = ?"
 		conditon = append(conditon, host)
 	}
-	db.DB.Where(query, conditon...).Limit(limit).Offset((page - 1) * limit).Find(&domains)
+	db.Session().Where(query, conditon...).Limit(limit).Offset((page - 1) * limit).Find(&domains)
 	return domains
 }
 
 // DeleteDomain domain delete
 func DeleteDomain(id int) {
-	db.DB.Delete(&model.Domain{}, "id = ?", id)
+	db.Session().Delete(&model.Domain{}, "id = ?", id)
 }

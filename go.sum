@@ -171,6 +171,7 @@ github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXf
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod h1:kDXzergiv9cbyO7IOYJZWg1U88JhDg3PB6klq9Hg2pA=
 github.com/upyun/go-sdk v2.1.0+incompatible h1:OdjXghQ/TVetWV16Pz3C1/SUpjhGBVPr+cLiqZLLyq0=
 github.com/upyun/go-sdk v2.1.0+incompatible/go.mod h1:eu3F5Uz4b9ZE5bE5QsCL6mgSNWRwfj0zpJ9J626HEqs=
+github.com/wecatch/devops-ui v0.0.0-20190420084102-e3ea75ec86d5 h1:RhjLcMAJCZ4cj4ogKecKwvvbnF/Ui6SXU1jgcykIx2w=
 github.com/xanzy/go-gitlab v0.10.8 h1:Q7GKKO5BRKZIExF5FCH4co/whvtP8cvN1kj9/ZAzgYA=
 github.com/xanzy/go-gitlab v0.10.8/go.mod h1:CRKHkvFWNU6C3AEfqLWjnCNnAs4nj8Zk95rX2S3X6Mw=
 go.opencensus.io v0.18.0/go.mod h1:vKdFvxhtzZ9onBp9VKHK8z/sRpBMnKAsufL7wlDrCOA=

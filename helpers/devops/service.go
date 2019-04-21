@@ -23,7 +23,7 @@ func CreateService(form resources.ServiceForm) {
 	service.UpdatedAt = now
 	service.CreatedAt = now
 	fmt.Println(service)
-	db.DB.Create(&service)
+	db.Session().Create(&service)
 }
 
 // UpdateService update
@@ -33,7 +33,7 @@ func UpdateService(id int, form resources.ServiceForm) {
 			ID: id,
 		},
 	}
-	db.DB.Model(&service).Updates(&model.Service{
+	db.Session().Model(&service).Updates(&model.Service{
 		Name:          form.Name,
 		URL:           form.URL,
 		Desc:          form.Desc,
@@ -59,12 +59,12 @@ func QueryService(page, limit int, name, url string) []model.Service {
 		query += "and url = ?"
 		conditon = append(conditon, url)
 	}
-	db.DB.Where(query, conditon...).Limit(limit).Offset((page - 1) * limit).Find(&ret)
+	db.Session().Where(query, conditon...).Limit(limit).Offset((page - 1) * limit).Find(&ret)
 
 	return ret
 }
 
 // DeleteService service delete
 func DeleteService(id int) {
-	db.DB.Delete(&model.Service{}, "id = ?", id)
+	db.Session().Delete(&model.Service{}, "id = ?", id)
 }

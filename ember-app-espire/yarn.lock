@@ -176,7 +176,6 @@ ansi-styles@^3.0.0, ansi-styles@^3.2.1:
 ansi_up@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/ansi_up/download/ansi_up-3.0.0.tgz#27f45d8f457d9ceff59e4ea03c8e6f13c1a303e8"
-  integrity sha1-J/Rdj0V9nO/1nk6gPI5vE8GjA+g=
 
 ansicolors@~0.2.1:
   version "0.2.1"
@@ -519,6 +518,12 @@ babel-plugin-ember-modules-api-polyfill@^2.5.0:
   resolved "http://registry.npm.taobao.org/babel-plugin-ember-modules-api-polyfill/download/babel-plugin-ember-modules-api-polyfill-2.5.0.tgz#860aab9fecbf38c10d1fe0779c6979a854fff154"
   dependencies:
     ember-rfc176-data "^0.3.5"
+
+babel-plugin-ember-modules-api-polyfill@^2.6.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-2.9.0.tgz#8503e7b4192aeb336b00265e6235258ff6b754aa"
+  dependencies:
+    ember-rfc176-data "^0.3.9"
 
 babel-plugin-htmlbars-inline-precompile@^0.2.5:
   version "0.2.5"
@@ -2075,6 +2080,24 @@ ember-cli-babel@^6.16.0:
     ember-cli-version-checker "^2.1.2"
     semver "^5.5.0"
 
+ember-cli-babel@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.18.0.tgz#3f6435fd275172edeff2b634ee7b29ce74318957"
+  dependencies:
+    amd-name-resolver "1.2.0"
+    babel-plugin-debug-macros "^0.2.0-beta.6"
+    babel-plugin-ember-modules-api-polyfill "^2.6.0"
+    babel-plugin-transform-es2015-modules-amd "^6.24.0"
+    babel-polyfill "^6.26.0"
+    babel-preset-env "^1.7.0"
+    broccoli-babel-transpiler "^6.5.0"
+    broccoli-debug "^0.6.4"
+    broccoli-funnel "^2.0.0"
+    broccoli-source "^1.1.0"
+    clone "^2.0.0"
+    ember-cli-version-checker "^2.1.2"
+    semver "^5.5.0"
+
 ember-cli-broccoli-sane-watcher@^2.1.1:
   version "2.2.1"
   resolved "http://registry.npm.taobao.org/ember-cli-broccoli-sane-watcher/download/ember-cli-broccoli-sane-watcher-2.2.1.tgz#0fe94d9a28cf8f4c07aa691966f4364d93bdd973"
@@ -2427,6 +2450,10 @@ ember-rfc176-data@^0.3.5:
   version "0.3.5"
   resolved "http://registry.npm.taobao.org/ember-rfc176-data/download/ember-rfc176-data-0.3.5.tgz#f630e550572c81a5e5c7220f864c0f06eee9e977"
 
+ember-rfc176-data@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.9.tgz#44b6e051ead6c044ea87bd551f402e2cf89a7e3d"
+
 ember-router-generator@^1.2.3:
   version "1.2.3"
   resolved "http://registry.npm.taobao.org/ember-router-generator/download/ember-router-generator-1.2.3.tgz#8ed2ca86ff323363120fc14278191e9e8f1315ee"
@@ -2440,16 +2467,17 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-babel "^6.9.0"
     ember-cli-version-checker "^2.1.0"
 
-ember-semantic-ui@^0.2.0:
-  version "0.2.0"
-  resolved "http://registry.npm.taobao.org/ember-semantic-ui/download/ember-semantic-ui-0.2.0.tgz#d4fc2773b94ab7b98e4b7b25a6edee8a8aa2fedf"
+ember-semantic-ui@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/ember-semantic-ui/-/ember-semantic-ui-0.2.3.tgz#6c09a1bbf86b2bb522e8617bbaba0de6153ff967"
   dependencies:
     broccoli-funnel "^1.0.1"
     broccoli-merge-trees "^1.1.1"
-    ember-cli-babel "^6.6.0"
+    ember-cli-babel "^6.18.0"
     ember-cli-htmlbars "1.1.1"
     moment "^2.22.2"
     pikaday "^1.7.0"
+    semantic-ui-css "^2.4.1"
 
 ember-source@~3.4.0:
   version "3.4.5"
@@ -3923,6 +3951,10 @@ jquery-deferred@^0.3.0:
 jquery@^3.3.1:
   version "3.3.1"
   resolved "http://registry.npm.taobao.org/jquery/download/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+
+jquery@x.*:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.0.tgz#8de513fa0fa4b2c7d2e48a530e26f0596936efdf"
 
 js-reporters@1.2.1:
   version "1.2.1"
@@ -5568,6 +5600,12 @@ sane@^4.0.0:
 sax@^1.2.4:
   version "1.2.4"
   resolved "http://registry.npm.taobao.org/sax/download/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+
+semantic-ui-css@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz#f5aea39fafb787cbd905ec724272a3f9cba9004a"
+  dependencies:
+    jquery x.*
 
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
   version "5.5.0"

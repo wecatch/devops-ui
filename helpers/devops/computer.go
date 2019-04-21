@@ -20,7 +20,7 @@ func CreateComputer(form resources.ComputerForm) {
 	now := time.Now()
 	computer.UpdatedAt = now
 	computer.CreatedAt = now
-	db.DB.Create(&computer)
+	db.Session().Create(&computer)
 }
 
 //CreateComputerWithField for insert host
@@ -37,7 +37,7 @@ func CreateComputerWithField(hostID, hostName, hostTag string, CPU, RAM uint, pr
 	now := time.Now()
 	computer.UpdatedAt = now
 	computer.CreatedAt = now
-	db.DB.Create(&computer)
+	db.Session().Create(&computer)
 }
 
 // UpdateComputer update
@@ -48,7 +48,7 @@ func UpdateComputer(id int, form resources.ComputerForm) {
 		PrivateIP: form.PrivateIP,
 		PublicIP:  form.PublicIP,
 	}
-	db.DB.Model(&computer).Where("id=?", id).Updates(computer)
+	db.Session().Model(&computer).Where("id=?", id).Updates(computer)
 }
 
 // QueryAppComputer according to tag and name query computer list
@@ -67,7 +67,7 @@ func QueryAppComputer(appID interface{}, page, limit int, appName string) (resul
 
 	// select app.id as app_id, app.name, app.tag, computer.`cpu`, computer.ram,computer.private_ip, computer.public_ip,computer.host_id,computer_role.register_status
 	// from app inner join `computer_role` on app.id = computer_role.app_id inner join computer on `computer_role`.host_id = computer.host_id;
-	sql := db.DB.Table("app").Select(
+	sql := db.Session().Table("app").Select(
 		`app.id as app_id, app.name, app.tag, app.port, computer.cpu, computer.ram,computer.private_ip,
 		computer.public_ip,computer.host_id,computer_role.register_status`).Joins(
 		`inner join computer_role on app.id = computer_role.app_id inner join computer on computer_role.host_id = computer.host_id`).Order(
@@ -92,26 +92,26 @@ func QueryComputer(tag, name, searchValue string, page, limit int) []model.Compu
 	}
 	var ret []model.Computer
 
-	db.DB.Where("host_tag = ?", searchValue).Or("host_name = ?", searchValue).Or("private_ip like ?", "%"+searchValue+"%").Limit(limit).Offset((page - 1) * limit).Find(&ret)
-	// db.DB.Where(&model.Computer{HostTag: tag, HostName: name}).Limit(limit).Offset((page - 1) * limit).Find(&ret)
+	db.Session().Where("host_tag = ?", searchValue).Or("host_name = ?", searchValue).Or("private_ip like ?", "%"+searchValue+"%").Limit(limit).Offset((page - 1) * limit).Find(&ret)
+	// db.Session().Where(&model.Computer{HostTag: tag, HostName: name}).Limit(limit).Offset((page - 1) * limit).Find(&ret)
 	return ret
 }
 
 //QueryOneComputer for one computer according to id
 func QueryOneComputer(id int, hostID string) model.Computer {
 	computer := model.Computer{}
-	db.DB.Where(&model.Computer{HostID: hostID, BaseModel: model.BaseModel{ID: id}}).First(&computer)
+	db.Session().Where(&model.Computer{HostID: hostID, BaseModel: model.BaseModel{ID: id}}).First(&computer)
 	return computer
 }
 
 // DeleteComputer for computer delete
 func DeleteComputer(id int) {
-	db.DB.Delete(&model.Computer{}, "id = ?", id)
+	db.Session().Delete(&model.Computer{}, "id = ?", id)
 }
 
 // DeleteAllComputers
 func DeleteAllComputers() {
-	db.DB.Delete(&model.Computer{}, "id > ?", 0)
+	db.Session().Delete(&model.Computer{}, "id > ?", 0)
 }
 
 // CreateDisk for disk create
@@ -124,7 +124,7 @@ func CreateDisk(form resources.DiskForm) {
 	now := time.Now()
 	disk.UpdatedAt = now
 	disk.CreatedAt = now
-	db.DB.Create(&disk)
+	db.Session().Create(&disk)
 }
 
 // UpdateDisk for disk update
@@ -135,12 +135,12 @@ func UpdateDisk(id int, form resources.DiskForm) {
 		ComputerID: form.ComputerID,
 	}
 	disk.UpdatedAt = time.Now()
-	db.DB.Model(&disk).Where("id=?", id).Updates(disk)
+	db.Session().Model(&disk).Where("id=?", id).Updates(disk)
 }
 
 // DeleteDisk for disk delete
 func DeleteDisk(id int) {
-	db.DB.Delete(&model.Disk{}, "id = ?", id)
+	db.Session().Delete(&model.Disk{}, "id = ?", id)
 }
 
 // UpdateComputerRole for register status chanee
@@ -155,11 +155,11 @@ func UpdateComputerRole(appID int, HostID string, registerStatus int, appName st
 	var app model.App
 	if appID == 0 {
 		// 根据 name 查找 app
-		db.DB.Where(&model.App{Name: appName}).Find(&app)
+		db.Session().Where(&model.App{Name: appName}).Find(&app)
 		appID = app.ID
 	}
 
-	db.DB.Model(&model.ComputerRole{}).Where(&model.ComputerRole{AppID: appID, HostID: HostID}).Update("register_status", registerStatus)
+	db.Session().Model(&model.ComputerRole{}).Where(&model.ComputerRole{AppID: appID, HostID: HostID}).Update("register_status", registerStatus)
 }
 
 //CreateComputerRole for computer and app role create
@@ -173,12 +173,12 @@ func CreateComputerRole(form resources.ComputerRoleForm) {
 			}
 			role.CreatedAt = now
 			role.UpdatedAt = now
-			db.DB.Create(&role)
+			db.Session().Create(&role)
 		}
 	}
 }
 
 //DeleteComputerRole for computer and app role delete
 func DeleteComputerRole(form resources.ComputerRoleForm) {
-	db.DB.Delete(&model.ComputerRole{}, "app_id in (?) and host_id in (?)", form.AppID, form.HostID)
+	db.Session().Delete(&model.ComputerRole{}, "app_id in (?) and host_id in (?)", form.AppID, form.HostID)
 }

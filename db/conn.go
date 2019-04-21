@@ -1,6 +1,7 @@
 package db
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
@@ -12,23 +13,57 @@ import (
 
 var logger = log.MakeLogger()
 
-// DB for database
-var DB *gorm.DB
+type DatabaseConf struct {
+	DatabaseAddress, DatabaseUser, DatabasePasswd, DatabaseName string
+	Debug                                                       bool
+}
+
+type DatabaseConfMap map[string]DatabaseConf
+
+var dbconfigMap DatabaseConfMap
 
 // NewDB init db
 func NewDB(
 	databaseAddress, databaseUser, databasePasswd, databaseName string, debug bool) {
-	var err error
 	logger = log.Logger("db")
-	DB, err = gorm.Open("mysql", fmt.Sprintf(
+	if dbconfigMap == nil {
+		dbconfigMap = make(DatabaseConfMap)
+	}
+	dbconfig := DatabaseConf{}
+	dbconfig.DatabaseAddress = databaseAddress
+	dbconfig.DatabaseUser = databaseUser
+	dbconfig.DatabasePasswd = databasePasswd
+	dbconfig.DatabaseName = databaseName
+	dbconfig.Debug = debug
+	dbconfigMap[databaseName] = dbconfig
+}
+
+func MakeNewDB(dbName string) (*gorm.DB, error) {
+	dbconfig, ok := dbconfigMap[dbName]
+	if !ok {
+		return nil, errors.New("dbName config not exist")
+	}
+	logger := log.Logger("makeNewDB")
+	db, err := gorm.Open("mysql", fmt.Sprintf(
 		"%s:%s@%s/%s?charset=utf8&parseTime=True&loc=Local",
-		databaseUser, databasePasswd, databaseAddress, databaseName))
+		dbconfig.DatabaseUser, dbconfig.DatabasePasswd, dbconfig.DatabaseAddress, dbconfig.DatabaseName))
 	if err != nil {
 		logger.Fatal(err)
 	}
 
-	DB.LogMode(debug)
-	DB.SingularTable(true)
+	db.LogMode(dbconfig.Debug)
+	db.SingularTable(true)
 	// check db conn
-	DB.Raw("select 1")
+	db.Raw("select 1")
+
+	return db, nil
+}
+
+func Session() *gorm.DB {
+	db, err := MakeNewDB("devops")
+	if err != nil {
+		return nil
+	}
+
+	return db
 }

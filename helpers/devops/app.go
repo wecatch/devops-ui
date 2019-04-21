@@ -40,7 +40,7 @@ func CreateApp(form resources.AppForm) {
 	now := time.Now()
 	service.UpdatedAt = now
 	service.CreatedAt = now
-	db.DB.Create(&service)
+	db.Session().Create(&service)
 }
 
 // UpdateApp update
@@ -51,7 +51,7 @@ func UpdateApp(id int, form resources.AppForm) {
 		},
 	}
 	logger.Debug(form.Port)
-	db.DB.Model(&service).Updates(&model.App{
+	db.Session().Model(&service).Updates(&model.App{
 		Name:             form.Name,
 		Tag:              form.Tag,
 		URL:              form.URL,
@@ -84,7 +84,7 @@ func QueryApp(page, limit int, name, url string) []model.App {
 	if url != "" {
 		app.URL = url
 	}
-	db.DB.Where(&app).Limit(limit).Offset((page - 1) * limit).Find(&ret)
+	db.Session().Where(&app).Limit(limit).Offset((page - 1) * limit).Find(&ret)
 
 	return ret
 }
@@ -93,13 +93,13 @@ func QueryApp(page, limit int, name, url string) []model.App {
 func QueryOneApp(id int, tag, name string) model.App {
 	app := model.App{}
 	//  When query with struct, GORM will only query with those fields has non-zero value, that means if your field’s value is 0, '', false or other zero values
-	db.DB.Where(&model.App{BaseModel: model.BaseModel{ID: id}, Tag: tag, Name: name}).First(&app)
+	db.Session().Where(&model.App{BaseModel: model.BaseModel{ID: id}, Tag: tag, Name: name}).First(&app)
 	return app
 }
 
 // DeleteApp app delete
 func DeleteApp(id int) {
-	db.DB.Delete(&model.App{}, "id = ?", id)
+	db.Session().Delete(&model.App{}, "id = ?", id)
 }
 
 // QueryAppDeploy for deploy task
@@ -108,7 +108,7 @@ func QueryAppDeploy(appID int, page, limit int) []model.Deploy {
 		limit = 20
 	}
 	ret := make([]model.Deploy, limit)
-	db.DB.Where(&model.Deploy{AppID: appID}).Limit(limit).Order("created_at desc").Offset((page - 1) * limit).Find(&ret)
+	db.Session().Where(&model.Deploy{AppID: appID}).Limit(limit).Order("created_at desc").Offset((page - 1) * limit).Find(&ret)
 
 	return ret
 }
@@ -116,7 +116,7 @@ func QueryAppDeploy(appID int, page, limit int) []model.Deploy {
 // QueryOneDeploy for deploy task
 func QueryOneDeploy(deployID int) model.Deploy {
 	ret := model.Deploy{}
-	db.DB.Where(&model.Deploy{BaseModel: model.BaseModel{ID: deployID}}).First(&ret)
+	db.Session().Where(&model.Deploy{BaseModel: model.BaseModel{ID: deployID}}).First(&ret)
 	return ret
 }
 
@@ -127,7 +127,7 @@ func QueryTag(page, limit int) []model.Tag {
 		limit = 100
 	}
 	var ret []model.Tag
-	db.DB.Where("").Limit(limit).Offset((page - 1) * limit).Find(&ret)
+	db.Session().Where("").Limit(limit).Offset((page - 1) * limit).Find(&ret)
 
 	return ret
 }
@@ -141,7 +141,7 @@ func CreateTag(form resources.TagForm) {
 	now := time.Now()
 	tag.UpdatedAt = now
 	tag.CreatedAt = now
-	db.DB.Create(&tag)
+	db.Session().Create(&tag)
 }
 
 // CreateDeploy for app tag create
@@ -162,7 +162,7 @@ func CreateDeploy(form resources.DeployForm) model.Deploy {
 	tag.CreatedAt = now
 	tag.StartedAt = now
 	tag.FinishedAt = now
-	db.DB.Create(&tag)
+	db.Session().Create(&tag)
 
 	return tag
 
@@ -176,9 +176,9 @@ func QueryNewDeploy() services.DeployData {
 	var hostIds []string
 	var hosts []string
 	var value string
-	db.DB.Where(&model.Deploy{Status: resources.DeployJobNew}).Last(&deploy)
-	db.DB.Where("id = ?", deploy.AppID).First(&app)
-	rows, _ := db.DB.Table("computer_role").Select("host_id").Where("app_id = ?", app.ID).Rows()
+	db.Session().Where(&model.Deploy{Status: resources.DeployJobNew}).Last(&deploy)
+	db.Session().Where("id = ?", deploy.AppID).First(&app)
+	rows, _ := db.Session().Table("computer_role").Select("host_id").Where("app_id = ?", app.ID).Rows()
 
 	if deploy.Hosts == "" {
 		for rows.Next() {
@@ -188,7 +188,7 @@ func QueryNewDeploy() services.DeployData {
 			}
 			hostIds = append(hostIds, value)
 		}
-		rows, _ = db.DB.Table("computer").Select("private_ip").Where("host_id in (?)", hostIds).Rows()
+		rows, _ = db.Session().Table("computer").Select("private_ip").Where("host_id in (?)", hostIds).Rows()
 		for rows.Next() {
 			err := rows.Scan(&value)
 			if err != nil {
@@ -223,14 +223,14 @@ func QueryNewDeploy() services.DeployData {
 func UpdateDeployStatus(id int, status string) {
 	switch status {
 	case resources.DeployJobDoing:
-		db.DB.Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Update("status", status)
+		db.Session().Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Update("status", status)
 	case resources.DeployJobFail, resources.DeployJobRollback, resources.DeployJobSuccess:
-		db.DB.Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Updates(&model.Deploy{Status: status, FinishedAt: time.Now()})
+		db.Session().Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Updates(&model.Deploy{Status: status, FinishedAt: time.Now()})
 	}
 }
 
 //UpdateDeployLog update deploy log
 func UpdateDeployLog(id int, message string) {
 	logger.Warn(id, message)
-	db.DB.Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Update("log", gorm.Expr("concat(log, ?)", message))
+	db.Session().Model(&model.Deploy{BaseModel: model.BaseModel{ID: id}}).Update("log", gorm.Expr("concat(log, ?)", message))
 }
